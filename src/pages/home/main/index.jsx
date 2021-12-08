@@ -7,7 +7,7 @@ class Main extends Component{
         return(
             <div className={style.mainContent}>
                 <div className={style.toolBar}>
-                input
+                
                 </div>
             </div>
         )
