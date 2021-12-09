@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Dropdown, message } from 'antd';
 import FrontendAuth from '@/router/FrontendAuth'
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   UserOutlined,
   VideoCameraOutlined,
+  DownOutlined,
 } from '@ant-design/icons';
 import './index.scss'
 const { Header, Sider, Content } = Layout;
@@ -25,7 +26,22 @@ class Index extends Component{
         this.props.history.push(path)
     }
 
+    logout = () => {
+        localStorage.removeItem('token');
+        message.success('退出成功');
+        this.props.history.push('/login');
+    }
+
     render(){
+        const menu = (
+            <Menu>
+                <Menu.Item>
+                    <a onClick={this.logout} target="_blank" >
+                        退出登录
+                    </a>
+                </Menu.Item>
+            </Menu>
+            );
         return(
             <Layout id="main">
                 <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
@@ -45,6 +61,13 @@ class Index extends Component{
                     className: 'trigger',
                     onClick: this.toggle,
                     })}
+                    <div className='rightBar'>
+                    <Dropdown overlay={menu}>
+                        <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                        {localStorage.getItem('token')} <DownOutlined />
+                        </a>
+                    </Dropdown>
+                    </div>
                 </Header>
                 <Content
                     className="site-layout-background"
