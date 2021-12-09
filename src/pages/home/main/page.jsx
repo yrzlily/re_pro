@@ -1,5 +1,6 @@
-import {Component} from 'react'
+import React, { Component } from 'react'
 import { Table, Button } from 'antd';
+import Open from './components/open'
 
 const columns = [
     {
@@ -31,6 +32,7 @@ class Page extends Component{
         selectedRowKeys: [], // Check here to configure the default column
         loading: false,
     };
+    showOpen = React.createRef();
 
     start = () => {
         this.setState({ loading: true });
@@ -48,24 +50,37 @@ class Page extends Component{
         this.setState({ selectedRowKeys });
     };
 
+    openWin =() => {
+        console.log(this.showOpen)
+        this.showOpen.showModal()
+        // this.showOpen.setState({
+        //     isModalVisible: true
+        // })
+    }
+
     render(){
-        const { loading, selectedRowKeys } = this.state;
+        const { loading, selectedRowKeys, showOpen } = this.state;
         const rowSelection = {
         selectedRowKeys,
         onChange: this.onSelectChange,
         };
         const hasSelected = selectedRowKeys.length > 0;
+
         return(
             <div>
                 <div style={{ marginBottom: 16 }}>
                 <Button type="primary" onClick={this.start} disabled={!hasSelected} loading={loading}>
                     Reload
                 </Button>
+                <Button type="primary" onClick={this.openWin} >
+                    openWin
+                </Button>
                 <span style={{ marginLeft: 8 }}>
                     {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
                 </span>
                 </div>
                 <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
+                <Open ref={el=>this.showOpen=el} />
             </div>
         )
     }

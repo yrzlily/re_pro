@@ -1,112 +1,135 @@
 import {Component} from 'react'
 import style from './index.module.scss'
-import { Column, Mix } from '@ant-design/charts';
+import { Column } from '@ant-design/charts';
 
 class Main extends Component{
     render(){
-        const expectData = [
+        const data = [
             {
-              value: 100,
-              name: '展现',
-            },
-            {
-              value: 80,
-              name: '点击',
+                country: 'Asia',
+                year: '1750',
+                value: 502,
             },
             {
-              value: 60,
-              name: '访问',
+                country: 'Asia',
+                year: '1800',
+                value: 635,
             },
             {
-              value: 40,
-              name: '咨询',
+                country: 'Asia',
+                year: '1850',
+                value: 809,
             },
             {
-              value: 30,
-              name: '订单',
-            },
-          ];
-          const actualData = [
-            {
-              value: 80,
-              name: '展现',
+                country: 'Asia',
+                year: '1900',
+                value: 947,
             },
             {
-              value: 50,
-              name: '点击',
+                country: 'Asia',
+                year: '1950',
+                value: 1402,
             },
             {
-              value: 30,
-              name: '访问',
+                country: 'Asia',
+                year: '1999',
+                value: 3634,
             },
             {
-              value: 10,
-              name: '咨询',
+                country: 'Asia',
+                year: '2050',
+                value: 5268,
             },
             {
-              value: 5,
-              name: '订单',
+                country: 'Africa',
+                year: '1750',
+                value: 106,
             },
-          ];
-          const config = {
-            appendPadding: [8, 40, 8, 18],
-            syncViewPadding: true,
-            meta: {
-              value: {
-                sync: true,
-              },
+            {
+                country: 'Africa',
+                year: '1800',
+                value: 107,
             },
-            tooltip: {
-              shared: true,
-              showMarkers: false,
-              showTitle: false,
+            {
+                country: 'Africa',
+                year: '1850',
+                value: 111,
             },
-            plots: [
-              {
-                type: 'funnel',
-                options: {
-                  data: expectData,
-                  yField: 'value',
-                  xField: 'name',
-                  shape: 'pyramid',
-                  conversionTag: false,
-                  label: {
-                    position: 'right',
-                    style: {
-                      fill: 'rgba(0,0,0,0.65)',
-                    },
-                    offsetX: 10,
-                  },
-                  funnelStyle: {
-                    fillOpacity: 0.85,
-                  },
+            {
+                country: 'Africa',
+                year: '1900',
+                value: 133,
+            },
+            {
+                country: 'Africa',
+                year: '1950',
+                value: 221,
+            },
+            {
+                country: 'Africa',
+                year: '1999',
+                value: 767,
+            },
+            {
+                country: 'Africa',
+                year: '2050',
+                value: 1766,
+            },
+            {
+                country: 'Europe',
+                year: '1750',
+                value: 163,
+            },
+            {
+                country: 'Europe',
+                year: '1800',
+                value: 203,
+            },
+            {
+                country: 'Europe',
+                year: '1850',
+                value: 276,
+            },
+            {
+                country: 'Europe',
+                year: '1900',
+                value: 408,
+            },
+            {
+                country: 'Europe',
+                year: '1950',
+                value: 547,
+            },
+            {
+                country: 'Europe',
+                year: '1999',
+                value: 729,
+            },
+            {
+                country: 'Europe',
+                year: '2050',
+                value: 628,
+            },
+        ];
+        const config = {
+            data,
+            xField: 'year',
+            yField: 'value',
+            seriesField: 'country',
+            isPercent: true,
+            isStack: true,
+            label: {
+                position: 'middle',
+                content: (item) => {
+                return item.value.toFixed(2);
                 },
-              },
-              {
-                type: 'funnel',
-                options: {
-                  data: actualData,
-                  yField: 'value',
-                  xField: 'name',
-                  shape: 'pyramid',
-                  conversionTag: false,
-                  label: false,
-                  funnelStyle: {
-                    lineWidth: 1,
-                    stroke: '#fff',
-                  },
+                style: {
+                fill: '#fff',
                 },
-              },
-            ],
-            interactions: [
-              {
-                type: 'element-active',
-              },
-            ],
+            },
         };
-
         return(
-            <Mix {...config} />
+            <Column {...config} />
         )
     }
 }
