@@ -28,6 +28,11 @@ for (let i = 0; i < 46; i++) {
 }
 
 class Page extends Component{
+
+    constructor(){
+        super()
+    }
+
     state = {
         selectedRowKeys: [], // Check here to configure the default column
         loading: false,
@@ -51,6 +56,7 @@ class Page extends Component{
     };
 
     openWin =() => {
+        console.log(window.$store)
         console.log(this.showOpen)
         this.showOpen.showModal()
         // this.showOpen.setState({
