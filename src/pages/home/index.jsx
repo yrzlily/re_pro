@@ -12,6 +12,7 @@ import './index.scss'
 const { Header, Sider, Content } = Layout;
 
 class Index extends Component{
+    
     state = {
         collapsed: false,
     };
