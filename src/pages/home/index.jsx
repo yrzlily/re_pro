@@ -1,21 +1,40 @@
 import React, {Component} from 'react'
+import request from '@/utils/request'
 import { Layout, Menu, Dropdown, message } from 'antd';
 import FrontendAuth from '@/router/FrontendAuth'
 import {
   MenuUnfoldOutlined,
+  AppstoreOutlined,
   MenuFoldOutlined,
   UserOutlined,
   VideoCameraOutlined,
   DownOutlined,
 } from '@ant-design/icons';
+import MenuItem from './components/MenuItem'
 import './index.scss'
+import {getParentTag} from '@/utils/base'
+
+const { SubMenu } = Menu;
 const { Header, Sider, Content } = Layout;
 
 class Index extends Component{
-    
-    state = {
-        collapsed: false,
-    };
+
+    constructor(props){
+        super()
+        this.state = {
+            collapsed: false,
+            menuList: [
+                {label: '图表管理' ,path: '/home', icon: <UserOutlined/>, children:[
+                    {label: '柱状图' ,path: '/home/index', icon: <UserOutlined/>, parentId:1},
+                ] },
+                {label: '表格管理' ,path: '/page', icon: <VideoCameraOutlined/>, children:[
+                    {label: '数据表格' ,path: '/home/page', icon: <VideoCameraOutlined/>, parentId:3},
+                ] },
+            ],
+            nowPath: props.location.pathname
+        };
+    }
+
 
     toggle = () => {
         this.setState({
@@ -24,6 +43,7 @@ class Index extends Component{
     };
 
     toDetail = (path) => {
+        console.log(this.state.nowPath);
         this.props.history.push(path)
     }
 
@@ -31,6 +51,15 @@ class Index extends Component{
         localStorage.removeItem('token');
         message.success('退出成功');
         this.props.history.push('/login');
+    }
+
+    showMessage = async () => {
+        // let res = await request.post('http://127.0.0.1');
+        // console.log(res)
+    }
+    
+    componentDidMount(){
+        this.showMessage();
     }
 
     render(){
@@ -47,13 +76,22 @@ class Index extends Component{
             <Layout id="main">
                 <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
                 <div className="logo" />
-                <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-                    <Menu.Item key="1" onClick={this.toDetail.bind(this, '/home/index')} icon={<UserOutlined />}>
-                    Index
-                    </Menu.Item>
-                    <Menu.Item key="2" onClick={this.toDetail.bind(this, '/home/page')} icon={<VideoCameraOutlined />}>
-                    Page
-                    </Menu.Item>
+                <Menu theme="dark" mode="inline" defaultOpenKeys={getParentTag(this.state.menuList, this.state.nowPath)} defaultSelectedKeys={[this.state.nowPath]}>
+                    {
+                        this.state.menuList.map((res, index)=>{
+                            if(res.children){
+                                return(
+                                    <MenuItem key={index} props={this.props} singMenu={res} />
+                                );
+                            }else{
+                                return(
+                                    <Menu.Item key={res.path} onClick={this.toDetail.bind(this, res.path)} icon={res.icon}>
+                                        {res.label}
+                                    </Menu.Item>
+                                )
+                            }
+                        })
+                    }
                 </Menu>
                 </Sider>
                 <Layout className="site-layout">
