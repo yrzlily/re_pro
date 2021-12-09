@@ -56,6 +56,7 @@ class Page extends Component{
     };
 
     openWin =() => {
+        
         console.log(window.$store)
         console.log(this.showOpen)
         this.showOpen.showModal()
