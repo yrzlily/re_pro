@@ -12,7 +12,7 @@ function MenuItemCom(menu, props){
     }
 
     let singMenu = state.singMenu;
-    
+    //递归遍历菜单栏
     return (
         <SubMenu key={singMenu.path} title={singMenu.label}>
             {

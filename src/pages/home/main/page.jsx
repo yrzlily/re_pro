@@ -57,7 +57,6 @@ class Page extends Component{
 
     openWin =() => {
         
-        console.log(window.$store)
         console.log(this.showOpen)
         this.showOpen.showModal()
         // this.showOpen.setState({
@@ -66,7 +65,7 @@ class Page extends Component{
     }
 
     render(){
-        const { loading, selectedRowKeys, showOpen } = this.state;
+        const { loading, selectedRowKeys } = this.state;
         const rowSelection = {
         selectedRowKeys,
         onChange: this.onSelectChange,

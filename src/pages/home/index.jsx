@@ -76,6 +76,7 @@ class Index extends Component{
             <Layout id="main">
                 <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
                 <div className="logo" />
+                {/* 左侧菜单栏 */}
                 <Menu theme="dark" mode="inline" defaultOpenKeys={getParentTag(this.state.menuList, this.state.nowPath)} defaultSelectedKeys={[this.state.nowPath]}>
                     {
                         this.state.menuList.map((res)=>{

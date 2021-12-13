@@ -11,7 +11,7 @@ const routerList = [
     ]},
     {name:'login' , exact:false, path:'/login', component:lazy(()=>import('@/pages/login/index'))},
 ];
-
+//遍历初始路由
 function BasicRoute (){
     return (
         <Suspense fallback={<div className={style.loading}><Spin/></div>}>
