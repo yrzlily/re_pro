@@ -4,17 +4,15 @@ import { Layout, Menu, Dropdown, message } from 'antd';
 import FrontendAuth from '@/router/FrontendAuth'
 import {
   MenuUnfoldOutlined,
-  AppstoreOutlined,
   MenuFoldOutlined,
   UserOutlined,
   VideoCameraOutlined,
   DownOutlined,
 } from '@ant-design/icons';
-import MenuItem from './components/MenuItem'
+import MenuItemCom from './components/MenuItemCom'
 import './index.scss'
 import {getParentTag} from '@/utils/base'
 
-const { SubMenu } = Menu;
 const { Header, Sider, Content } = Layout;
 
 class Index extends Component{
@@ -25,10 +23,12 @@ class Index extends Component{
             collapsed: false,
             menuList: [
                 {label: '图表管理' ,path: '/home', icon: <UserOutlined/>, children:[
-                    {label: '柱状图' ,path: '/home/index', icon: <UserOutlined/>, parentId:1},
+                    {label: '数据图' ,path: '/home/', icon: <UserOutlined/>, children:[
+                        {label: '柱状图' ,path: '/home/index', icon: <UserOutlined/>}
+                    ]},
                 ] },
                 {label: '表格管理' ,path: '/page', icon: <VideoCameraOutlined/>, children:[
-                    {label: '数据表格' ,path: '/home/page', icon: <VideoCameraOutlined/>, parentId:3},
+                    {label: '数据表格' ,path: '/home/page', icon: <VideoCameraOutlined/>},
                 ] },
             ],
             nowPath: props.location.pathname
@@ -78,11 +78,9 @@ class Index extends Component{
                 <div className="logo" />
                 <Menu theme="dark" mode="inline" defaultOpenKeys={getParentTag(this.state.menuList, this.state.nowPath)} defaultSelectedKeys={[this.state.nowPath]}>
                     {
-                        this.state.menuList.map((res, index)=>{
+                        this.state.menuList.map((res)=>{
                             if(res.children){
-                                return(
-                                    <MenuItem key={index} props={this.props} singMenu={res} />
-                                );
+                                return MenuItemCom(res, this.props)
                             }else{
                                 return(
                                     <Menu.Item key={res.path} onClick={this.toDetail.bind(this, res.path)} icon={res.icon}>

@@ -2,25 +2,24 @@ import { Menu } from 'antd';
 
 const { SubMenu } = Menu;
 
-function MenuItemCom(props){
+function MenuItemCom(menu, props){
     const state = {
-        singMenu: props.singMenu,
+        singMenu: menu,
     }
 
     const toDetail = (path) => {
-        props.props.history.push(path);
+        props.history.push(path);
     }
 
     let singMenu = state.singMenu;
+    
     return (
         <SubMenu key={singMenu.path} title={singMenu.label}>
             {
-                singMenu.children.map((item, index) => {
+                singMenu.children.map((item) => {
                     if(item.children){
                         return (
-                            <SubMenu key={item.path} title={item.label}>
-                                <MenuItemCom props={props.props} menuList={item.children} />
-                            </SubMenu>
+                            MenuItemCom(item,props)
                         )
                     }else{
                         return (
