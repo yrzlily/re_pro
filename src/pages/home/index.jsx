@@ -23,7 +23,7 @@ class Index extends Component{
             collapsed: false,
             menuList: [
                 {label: '图表管理' ,path: '/home', icon: <UserOutlined/>, children:[
-                    {label: '数据图' ,path: '/home/', icon: <UserOutlined/>, children:[
+                    {label: '数据图' ,path: '/homes/', icon: <UserOutlined/>, children:[
                         {label: '柱状图' ,path: '/home/index', icon: <UserOutlined/>}
                     ]},
                 ] },
@@ -34,7 +34,6 @@ class Index extends Component{
             nowPath: props.location.pathname
         };
     }
-
 
     toggle = () => {
         this.setState({
