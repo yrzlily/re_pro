@@ -7,7 +7,8 @@ import style from  './router.scss'
 const routerList = [
     {name:'home', path:'/home', exact:true, component:lazy(()=>import('@/pages/home/index')), children:[
         {name:'index', path:'/home/index', exact:true, component:lazy(()=>import('@/pages/home/main/index'))},
-        {name:'index', path:'/home/page', exact:true, component:lazy(()=>import('@/pages/home/main/page'))},
+        {name:'page', path:'/home/page', exact:true, component:lazy(()=>import('@/pages/home/main/page'))},
+        {name:'test', path:'/home/test', exact:true, component:lazy(()=>import('@/pages/home/main/test'))},
     ]},
     {name:'login' , exact:false, path:'/login', component:lazy(()=>import('@/pages/login/index'))},
 ];

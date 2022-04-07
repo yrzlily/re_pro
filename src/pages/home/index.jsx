@@ -24,7 +24,8 @@ class Index extends Component{
             menuList: [
                 {label: '图表管理' ,path: '/home', icon: <UserOutlined/>, children:[
                     {label: '数据图' ,path: '/homes/', icon: <UserOutlined/>, children:[
-                        {label: '柱状图' ,path: '/home/index', icon: <UserOutlined/>}
+                        {label: '柱状图' ,path: '/home/index', icon: <UserOutlined/>},
+                        {label: '检测' ,path: '/home/test', icon: <UserOutlined/>}
                     ]},
                 ] },
                 {label: '表格管理' ,path: '/page', icon: <VideoCameraOutlined/>, children:[
